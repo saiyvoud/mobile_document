@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_document/view/auth/Register.dart';
+import 'package:mobile_document/view/auth/forgot.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -142,7 +143,9 @@ class _LoginViewState extends State<LoginView> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Forgot()));
+                    },
                     child: Text(
                       "Forgot",
                       style: TextStyle(
