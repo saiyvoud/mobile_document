@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_document/api/auth.dart';
 import 'package:mobile_document/components/messageHepler.dart';
+import 'package:mobile_document/router/router.dart';
+import 'package:nav_service/nav_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   final AuthApi _authApi = AuthApi();
@@ -28,6 +30,8 @@ class AuthProvider extends ChangeNotifier {
           isSuccess: true,
           message: "Login Success",
         );
+        NavService.pushReplacementNamed(RouterAPI.home);
+        clear();
         notifyListeners();
       }
     } catch (e) {
@@ -55,6 +59,8 @@ class AuthProvider extends ChangeNotifier {
           isSuccess: true,
           message: "Register Success",
         );
+        clear();
+        NavService.pop();
         notifyListeners();
       }
     } catch (e) {
@@ -80,6 +86,8 @@ class AuthProvider extends ChangeNotifier {
           isSuccess: true,
           message: "Forgot Success",
         );
+        clear();
+        NavService.pop();
         notifyListeners();
       }
     } catch (e) {

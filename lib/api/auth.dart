@@ -7,19 +7,16 @@ class AuthApi {
   Future<bool> Login({required String email, required String password}) async {
     try {
       final url = Uri.parse(ApiPath.login);
-      final header = {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-      };
+      final header = {"Accept": "application/json"};
       final body = {"email": email, "password": password};
       final response = await http.post(url, body: body, headers: header);
-      final data = apiResponseFromJson(response.toString());
+      // final data = apiResponseFromJson(response.toString());
       if (response.statusCode == 200) {
-        await HiveDatabase.saveToken(
-          token: data.data['token'],
-          refresh: data.data['refreshToken'],
-        );
-        await HiveDatabase.saveProfile(profile: data.data.toString());
+        // await HiveDatabase.saveToken(
+        //   token: data.data['token'],
+        //   refresh: data.data['refreshToken'],
+        // );
+        // await HiveDatabase.saveProfile(profile: data.data.toString());
         return true;
       }
       return false;
@@ -32,12 +29,9 @@ class AuthApi {
   Future<bool> Forgot({required String email, required String password}) async {
     try {
       final url = Uri.parse(ApiPath.forgot);
-      final header = {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-      };
+      final header = {"Accept": "application/json"};
       final body = {"email": email, "password": password};
-      final response = await http.post(url, body: body, headers: header);
+      final response = await http.put(url, body: body, headers: header);
 
       if (response.statusCode == 200) {
         return true;
@@ -57,13 +51,17 @@ class AuthApi {
   }) async {
     try {
       final url = Uri.parse(ApiPath.register);
-      final header = {
-        "Content-type": "application/json",
-        "Accept": "application/json",
+      final header = {"Accept": "application/json"};
+      final body = {
+        "username": usernamme,
+        "email": email,
+        "phoneNumber": phoneNumber,
+        "password": password,
+        "faculty_id": "null",
+        "office_id": "null",
       };
-      final body = {"email": email, "phoneNumber": phoneNumber};
       final response = await http.post(url, body: body, headers: header);
-
+        print(response.body);
       if (response.statusCode == 201) {
         return true;
       }
