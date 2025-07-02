@@ -17,12 +17,12 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Consumer<HomeProvider>(
-      builder: (context,api,child) {
+      builder: (context, api, child) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
             centerTitle: true,
-        
+
             title: Text(
               "ຕິດຕາມເອກະສານ",
               style: TextStyle(
@@ -43,40 +43,72 @@ class _HomeViewState extends State<HomeView> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Container(
-                      height: 50,
-                      width: size.width / 1.2,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 1,
-                            spreadRadius: 0,
-                            color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Container(
+                          height: 50,
+                          width: size.width / 1.5,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 1,
+                                spreadRadius: 0,
+                                color: Colors.black,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: TextFormField(
-                        controller:  api.search,
-                        onFieldSubmitted: (value){
-                          api.searchIn();
-                          api.searchOut();
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
+                          child: TextFormField(
+                            controller: api.search,
+                            onFieldSubmitted: (value) {
+                              api.searchIn();
+                              api.searchOut();
+                            },
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
+                              prefixIcon: Icon(Icons.search),
+                              border: InputBorder.none,
+                              hintText: "ຄົ້ນຫາເອກະສານຂອງທ່ານ",
+                            ),
                           ),
-                          prefixIcon: Icon(Icons.search),
-                          border: InputBorder.none,
-                          hintText: "ຄົ້ນຫາເອກະສານຂອງທ່ານ",
                         ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: GestureDetector(
+                          onTap: () {
+                            api.searchIn();
+                            api.searchOut();
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              color: Colors.indigo,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'ຄົ້ນຫາ',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
@@ -112,12 +144,12 @@ class _HomeViewState extends State<HomeView> {
                     ],
                   ),
                 ),
-               DocumentOut()
+                DocumentOut(),
               ],
             ),
           ),
         );
-      }
+      },
     );
   }
 }
